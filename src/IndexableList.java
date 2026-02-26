@@ -10,6 +10,23 @@ public class IndexableList<T> {
         data_array = (T[]) new Object[0];
     }
 
+    /**
+     * Initializes the container and all its parts with the given size
+     * to avoid the overhead of expanding it for each added value.
+     * Only use this if the container is filled right away, otherwise its data contains {@code null} values!
+     * @param size The initial size of the container.
+     */
+    @SuppressWarnings("unchecked")
+    public IndexableList(int size) {
+        data_array = (T[]) new Object[size];
+        index_array = new int[data_array.length];
+        id_array = new int[data_array.length];
+        for (int i = 0; i < data_array.length; i++) {
+            index_array[i] = i;
+            id_array[i] = i;
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public IndexableList(List<T> list) {
         data_array = (T[]) list.toArray(new Object[0]);
